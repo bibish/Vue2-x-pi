@@ -2,12 +2,13 @@
   <div class="todo">
   {{this.msg}}
   <ul>
-    <li v-for="list in todoList">{{list}}</li>
+    <li v-model="todoList" v-for="list in todoList">{{list.title}}</li>
   </ul>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Todo',
   data () {
@@ -16,14 +17,15 @@ export default {
     }
   },
   mounted () {
-   // this.getData()
+
   },
   computed: {
-    todoList () {
-      return this.$store.getters.getTodos
-    }
+    ...mapGetters({
+      todoList: 'getTodos'
+    })
   }
-}
+ }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -22,33 +22,8 @@ export default {
       data: false
     }
   },
-  methods: {
-    loadPosts: function () {
-      fetch('https://jsonplaceholder.typicode.com/posts?_start=0&_end=29')
-        .then(response => response.json())
-        .then(json => {
-          this.$store.commit('addPosts', json)
-        })
-    },
-    loadTodos: function () {
-      fetch('https://jsonplaceholder.typicode.com/todos?_start=0&_end=29')
-        .then(response => response.json())
-        .then(json => {
-          this.$store.commit('addTodos', json)
-        })
-    },
-    loadUsers: function () {
-      fetch('https://jsonplaceholder.typicode.com/users?_start=0&_end=29')
-        .then(response => response.json())
-        .then(json => {
-          this.$store.commit('addUsers', json)
-        })
-    },
-    loadContent: function () {
-      this.loadPosts()
-      this.loadTodos()
-      this.loadUsers()
-    }
+  mounted () {
+    this.$store.dispatch('loadTodos')
   }
 }
 

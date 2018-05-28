@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -21,17 +22,20 @@ const store = new Vuex.Store({
     }
   },
   mutations: {
-    addPosts: function (state, posts) {
-      Object.assign(state.posts, posts)
-    },
-    addUsers: function (state, users) {
-      Object.assign(state.users, users)
-    },
-    addTodos: function (state, todos) {
-      Object.assign(state.todos, todos)
+    SET_TODOS (state, todos) {
+      state.todos = todos
     }
   },
-  actions: {}
+  actions: {
+    loadTodos ({ commit }) {
+      axios
+        .get('https://jsonplaceholder.typicode.com/todos?_start=0&_end=29')
+        .then(r => r.data)
+        .then(todos => {
+          commit('SET_TODOS', todos)
+        })
+    }
+  }
 
 })
 
