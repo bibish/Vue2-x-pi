@@ -5,7 +5,6 @@
     <Album ></Album>
     <Todo ></Todo>
     <Post ></Post>
-    <button v-on:click="this.loadContent" v-if="!data">Get Data</button>
   </div>
 </template>
 

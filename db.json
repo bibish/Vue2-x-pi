@@ -5,5 +5,19 @@
       "title": "hello",
       "done": false
     }
+  ],
+  "albums": [
+    {
+      "id": 1,
+      "url": "https://avatars2.githubusercontent.com/u/23716996?s=40&v=4",
+      "title": "My git avatr"
+    }
+  ],
+  "posts":[
+    {
+      "id": 1,
+      "title": "mon premier post cool",
+      "content": "Du lorem disruptif !"
+    }
   ]
 }

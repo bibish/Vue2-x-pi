@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 
 Vue.use(Vuex)
-
+const API = 'https://my-json-server.typicode.com/bibish/kekvue'
 const store = new Vuex.Store({
   state: {
     todos: [],
@@ -29,7 +29,7 @@ const store = new Vuex.Store({
   actions: {
     loadTodos ({ commit }) {
       axios
-        .get('https://jsonplaceholder.typicode.com/todos?_start=0&_end=29')
+        .get(`${API}/todos`)
         .then(r => r.data)
         .then(todos => {
           commit('SET_TODOS', todos)
