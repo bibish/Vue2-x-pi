@@ -1,8 +1,14 @@
 <template>
   <div class="todo">
-  {{this.msg}}
+  <h3>todoList</h3>
+  <input placeholder="new todo" type="text" v-model="newDo.title">
+  <Button v-on:click="sendTodo">Add lodo</Button>
   <ul>
-    <li v-model="todoList" v-for="list in todoList">{{list.title}}</li>
+    <li :key="item.id" v-for="item in todoList" v-bind:class="[item.done ?  'done' : 'todoN']" class="list">
+    <span>{{item.title}}</span>
+    <i class="material-icons" v-if="!item.done" v-on:click="deleteTodo(item)">clear</i>
+    <i class="material-icons" v-if="!item.done">done</i>
+    </li>
   </ul>
   </div>
 </template>
@@ -13,18 +19,28 @@ export default {
   name: 'Todo',
   data () {
     return {
-      msg: 'vue todo'
+      newDo: {
+        title: '',
+        done: false
+      }
     }
   },
-  mounted () {
-
+  methods: {
+    sendTodo: function () {
+      if (this.$data.newDo.title.length > 0) {
+        this.$store.dispatch('addTodo', this.$data.newDo)
+      }
+    },
+    deleteTodo: function (todo) {
+      this.$store.dispatch('removeTodo', todo)
+    }
   },
   computed: {
     ...mapGetters({
       todoList: 'getTodos'
     })
   }
- }
+}
 
 </script>
 
@@ -34,4 +50,27 @@ export default {
   width:30%;
   border:1px solid yellow;
 }
+i{
+  vertical-align:bottom;
+  float:right;
+}
+.list{
+  text-align:left;
+  clear:both
+}
+.list span{
+  padding-left:10px;
+}
+.todoN:nth-child(even){
+  background-color:#efefef;
+
+}
+.todoN:nth-child(odd){
+  background-color:#efe;
+
+}
+.done{
+  background-color: #42b983
+}
+
 </style>

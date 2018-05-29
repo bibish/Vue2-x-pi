@@ -1,7 +1,6 @@
 <template>
   <div class="container">
     <h1>{{msg}}</h1>
-    
     <Album ></Album>
     <Todo ></Todo>
     <Post ></Post>
@@ -37,6 +36,8 @@ export default {
  border:1px solid red;
  flex-wrap:wrap;
  justify-content:space-between;
+ align-items: flex-start;
+align-content: flex-start;
 }
 h1, h2 {
   font-weight: normal;
@@ -47,8 +48,7 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
-  margin: 0 10px;
+  padding:5px 0;
 }
 a {
   color: #42b983;
