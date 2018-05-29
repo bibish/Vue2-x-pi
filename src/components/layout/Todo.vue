@@ -32,6 +32,7 @@ export default {
       }
     },
     deleteTodo: function (todo) {
+      console.log('remove this',todo)
       this.$store.dispatch('removeTodo', todo)
     }
   },

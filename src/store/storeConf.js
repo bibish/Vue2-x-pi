@@ -31,9 +31,11 @@ const store = new Vuex.Store({
     },
     ADD_TODO (state, todos) {
       state.todos.push(todos)
+      console.log('mutate', state)
     },
     REMOVE_TODO (state, todo) {
       const todos = state.todos
+      console.log('remove from local state', todos.indexOf(todo), 'in state', typeof state.todos)
       todos.splice(todos.indexOf(todo), 1)
     }
   },
@@ -52,19 +54,21 @@ const store = new Vuex.Store({
           'title': newDo.title,
           'done': newDo.done
         })
-        .then(function (response) {
-          commit('ADD_TODO', newDo)
+        .then(r => {
+          console.log(r)
+          const body = r.data
+          commit('ADD_TODO', body)
         })
-        .catch(function (error) {
+        .catch(error => {
           console.log(error)
         })
     },
     removeTodo ({ commit }, todo) {
+      // console.log('before remove func in api', todo)
       axios
         .delete(`${API}/todos/${todo.id}`)
-        .then(() => {
-          console.log('removed todo', todo.id, 'from the server')
-          commit('REMOVE_TODO', todo.id)
+        .then(r => {
+          commit('REMOVE_TODO', todo)
         })
     }
   }
