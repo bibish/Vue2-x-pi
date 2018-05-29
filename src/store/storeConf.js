@@ -31,12 +31,15 @@ const store = new Vuex.Store({
     },
     ADD_TODO (state, todos) {
       state.todos.push(todos)
-      console.log('mutate', state)
+      // console.log('mutate', state)
     },
     REMOVE_TODO (state, todo) {
       const todos = state.todos
-      console.log('remove from local state', todos.indexOf(todo), 'in state', typeof state.todos)
+      // console.log('remove from local state', todos.indexOf(todo), 'in state', typeof state.todos)
       todos.splice(todos.indexOf(todo), 1)
+    },
+    UPDATE_TODO (state, todo) {
+      // nothing here
     }
   },
   actions: {
@@ -55,7 +58,7 @@ const store = new Vuex.Store({
           'done': newDo.done
         })
         .then(r => {
-          console.log(r)
+          // console.log(r)
           const body = r.data
           commit('ADD_TODO', body)
         })
@@ -70,6 +73,13 @@ const store = new Vuex.Store({
         .then(r => {
           commit('REMOVE_TODO', todo)
         })
+    },
+    doneTodo ({ commit }, updatedTodo) {
+      axios
+        .patch(`${API}/todos/${updatedTodo.id}`, updatedTodo)
+        // .then(r => {
+        //   commit('UPDATE_TODO', updatedTodo)
+        // })
     }
   }
 

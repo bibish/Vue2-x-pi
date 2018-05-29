@@ -6,8 +6,8 @@
   <ul>
     <li :key="item.id" v-for="item in todoList" v-bind:class="[item.done ?  'done' : 'todoN']" class="list">
     <span>{{item.title}}</span>
-    <i class="material-icons" v-if="!item.done" v-on:click="deleteTodo(item)">clear</i>
-    <i class="material-icons" v-if="!item.done">done</i>
+    <i class="material-icons"  v-on:click="deleteTodo(item)">clear</i>
+    <i class="material-icons" v-if="!item.done" v-on:click="doneTodo(item)">done</i>
     </li>
   </ul>
   </div>
@@ -32,8 +32,12 @@ export default {
       }
     },
     deleteTodo: function (todo) {
-      console.log('remove this',todo)
+      // console.log('remove this', todo)
       this.$store.dispatch('removeTodo', todo)
+    },
+    doneTodo: function (todo) {
+      todo.done = !todo.done
+      this.$store.dispatch('doneTodo', todo)
     }
   },
   computed: {
