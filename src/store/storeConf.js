@@ -12,7 +12,8 @@ const store = new Vuex.Store({
       'done': ''
     }],
     posts: [],
-    users: []
+    users: [],
+    connectedUser: false
   },
   getters: {
     getPosts: state => {

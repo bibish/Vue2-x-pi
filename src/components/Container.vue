@@ -1,19 +1,19 @@
 <template>
   <div class="container">
-    <h1>{{msg}}</h1>
-    <Album ></Album>
-    <Todo ></Todo>
-    <Post ></Post>
+    <Menu></Menu>
+    <h1>{{msg}} what</h1>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import Menu from './Menu'
 import Album from './layout/Album'
 import Todo from './layout/Todo'
 import Post from './layout/Post'
 export default {
   name: 'Container',
-  components: { Album, Todo, Post },
+  components: { Album, Todo, Post, Menu },
   data () {
     return {
       msg: 'container',
