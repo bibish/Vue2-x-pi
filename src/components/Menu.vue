@@ -1,19 +1,29 @@
 <template>
   <div class="menu">
-  <ul>
-    <li><router-link to="/">Home</router-link></li>
-    <li><router-link to="Todo">Todolist</router-link></li>
-  </ul>
+  <nav>
+    <ul>
+      <li><router-link to="/">Home</router-link></li>
+      <li><router-link to="Todo">Todolist</router-link></li>
+      <li><router-link to="Blog">Blog</router-link></li>
+      <li><router-link to="onVerraPlusTard">test</router-link></li>
+
+    </ul>
+  </nav>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   name: 'Menu',
   data () {
     return {}
   },
-  mounted () {}
+  computed: {
+    ...mapGetters({
+      user: 'state'
+    })
+  }
 }
 
 </script>
@@ -27,6 +37,11 @@ ul{
 ul li{
   display:inline-block;
   padding:0 5px;
+}
+.router-link-exact-active{
+  font-weight:bold;
+  padding:3px;
+  border:1px solid ;
 }
 
 </style>

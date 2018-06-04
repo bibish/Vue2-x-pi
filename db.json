@@ -1,54 +1,24 @@
 {
   "todos": [
     {
-      "title": "ok",
+      "title": "azerty",
       "done": true,
       "id": 1
     },
     {
-      "title": "coucou",
+      "title": "azerty",
       "done": false,
       "id": 2
     },
     {
-      "title": "hllo",
-      "done": false,
+      "title": "azerty",
+      "done": true,
       "id": 3
     },
     {
-      "title": "todo1",
+      "title": "azerty",
       "done": false,
       "id": 4
-    },
-    {
-      "title": "todo1",
-      "done": false,
-      "id": 5
-    },
-    {
-      "title": "todo1",
-      "done": false,
-      "id": 6
-    },
-    {
-      "title": "todo1",
-      "done": true,
-      "id": 7
-    },
-    {
-      "title": "todo1",
-      "done": false,
-      "id": 8
-    },
-    {
-      "title": "todo1",
-      "done": false,
-      "id": 9
-    },
-    {
-      "title": "todo1",
-      "done": true,
-      "id": 10
     }
   ],
   "albums": [
@@ -61,8 +31,30 @@
   "posts": [
     {
       "id": 1,
+      "author": "Amb",
+      "authorId":1,
+      "category":"lorem",
+      "img": "http://via.placeholder.com/350x150",
       "title": "mon premier post cool",
-      "content": "Du lorem disruptif !"
+      "content": "Du lorem disruptif à n'en plus finir !"
+    },
+    {
+      "id": 2,
+      "author": "Ambi",
+      "authorId":2,
+      "category":"sport",
+      "img": "http://via.placeholder.com/350x150",
+      "title": "mon premier post cool",
+      "content": "Du lorem disruptif à n'en plus finir dans du sport!"
+    },
+    {
+      "id": 3,
+      "author": "Amb",
+      "authorId":1,
+      "category":"sport",
+      "img": "http://via.placeholder.com/350x150",
+      "title": "mon premier post cool",
+      "content": "Du lorem disruptif à n'en plus finir dans du sport mais pas le même!"
     }
   ]
 }

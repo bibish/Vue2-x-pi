@@ -1,28 +1,35 @@
 <template>
   <div class="container">
     <Menu></Menu>
-    <h1>{{msg}} what</h1>
+    <h1>Welcome there</h1>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Menu from './Menu'
-import Album from './layout/Album'
 import Todo from './layout/Todo'
 import Post from './layout/Post'
+import Test from './layout/Test'
 export default {
   name: 'Container',
-  components: { Album, Todo, Post, Menu },
+  components: { Todo, Post, Menu },
   data () {
-    return {
-      msg: 'container',
+    return { 
       data: false
     }
   },
   mounted () {
     this.$store.dispatch('loadTodos')
-  }
+    console.log(this.$store.getters.Users);
+  },
+  // beforeRouteEnter (to, from, next) {
+  //    next(vm => {
+  //     if(vm.$store.getters.Users.isUser === false){
+  //       next({path:'/signup'})
+  //     }
+  //   })
+  // }
 }
 
 </script>

@@ -1,15 +1,14 @@
 <template>
-  <div class="album">
-  {{this.msg}}
+  <div class="test">
+holllla
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Album',
+  name: 'test',
   data () {
     return {
-      msg: 'vue album'
     }
   }
 }
@@ -17,8 +16,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.album{
-  width:30%;
-  border:1px solid blue;
-}
+
 </style>

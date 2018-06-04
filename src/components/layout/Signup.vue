@@ -1,9 +1,11 @@
 <template>
   <div class="signup">
-  <label>connect Page</label>
+  <label>What's your name</label>
   <input type="text" required v-model="username" placeHolder="jhonos doesos">
-  <input type="password" required v-model="password" placeHolder="xxxx">
-  <button type="submit"> login </button>
+  <button @click="connect">GO</button>
+   <label v-if ="error === true">
+    minimum 3 letters
+  </label>
   </div>
 </template>
 
@@ -13,15 +15,21 @@ export default {
   data () {
     return {
       username: null,
-      password: null
+      password: null,
+      error:null
     }
   },
   methods: {
     connect: function () {
-      const { username, password } = this
-      this.$store.dispatch(AUTH_REQUEST, { username, password }).then(() => {
-        this.$router.push('/')
-      })
+      const { username } = this
+      if(username.length < 3){
+        this.error = true
+      }else{
+        this.$store.dispatch('connectUser', { username }).then(() => {
+                this.$router.push('/')
+              })
+      }
+      
     }
   }
 }

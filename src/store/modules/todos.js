@@ -4,6 +4,7 @@ const API = 'http://localhost:3000'
 const state = {
   todos: [{
     'id': '',
+    'userId': '',
     'title': '',
     'done': ''
   }]
@@ -65,12 +66,9 @@ const actions = {
         commit('REMOVE_TODO', todo)
       })
   },
-  doneTodo ({ commit }, updatedTodo) {
+  updateTodo ({ commit }, updatedTodo) {
     axios
       .patch(`${API}/todos/${updatedTodo.id}`, updatedTodo)
-      // .then(r => {
-      //   commit('UPDATE_TODO', updatedTodo)
-      // })
   }
 }
 

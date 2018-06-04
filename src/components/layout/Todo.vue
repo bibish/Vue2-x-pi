@@ -9,7 +9,7 @@
     <li :key="item.id" v-for="item in todoList" v-bind:class="[item.done ?  'done' : 'todoN']" class="list">
     <span>{{item.title}}</span>
     <i class="material-icons"  v-on:click="deleteTodo(item)">clear</i>
-    <i class="material-icons" v-if="!item.done" v-on:click="doneTodo(item)">done</i>
+    <i class="material-icons" v-if="!item.done" v-on:click="updateTodo(item)">done</i>
     </li>
   </ul>
   </div>
@@ -41,13 +41,12 @@ export default {
     },
     armaguedon: function (todoList) {
       for (const todo of todoList) {
-        // crappy crappy craaaaaaappy
         this.deleteTodo(todo)
       }
     },
-    doneTodo: function (todo) {
+    updateTodo: function (todo) {
       todo.done = !todo.done
-      this.$store.dispatch('doneTodo', todo)
+      this.$store.dispatch('updateTodo', todo)
     }
   },
   computed: {
