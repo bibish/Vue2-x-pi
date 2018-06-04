@@ -11,13 +11,9 @@
 export default {
   name: 'Menu',
   data () {
-    return {
-     
-    }
+    return {}
   },
-  mounted () {
-    
-  }
+  mounted () {}
 }
 
 </script>

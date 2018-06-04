@@ -1,12 +1,9 @@
 <template>
   <div class="signup">
-  <label>connect with your name</label>
-  <input type="text" v-model="nameInput" placeHolder="jhonos doesos">
-  <button @click="connect"> connect </button>
-<br>
-  <label>Or create user</label>
-  <input type="text" v-model="nameInput" placeHolder="jhonos doesos">
-  <button> create </button>
+  <label>connect Page</label>
+  <input type="text" required v-model="username" placeHolder="jhonos doesos">
+  <input type="password" required v-model="password" placeHolder="xxxx">
+  <button type="submit"> login </button>
   </div>
 </template>
 
@@ -15,12 +12,16 @@ export default {
   name: 'Signup',
   data () {
     return {
-      nameInput: ''
+      username: null,
+      password: null
     }
   },
   methods: {
     connect: function () {
-      
+      const { username, password } = this
+      this.$store.dispatch(AUTH_REQUEST, { username, password }).then(() => {
+        this.$router.push('/')
+      })
     }
   }
 }
