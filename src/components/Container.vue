@@ -21,7 +21,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadTodos')
-    console.log(this.$store.getters.Users)
+    //console.log(this.$store.getters.Users)
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {

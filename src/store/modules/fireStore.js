@@ -3,15 +3,11 @@ import firebase from 'firebase'
 const provider = new firebase.auth.GoogleAuthProvider()
 
 const state = {
-  user: null,
-  todos: [],
-  stateCo: null,
-  isConnected: false
+  isConnected: false,
+  userData: [],
+  stateCo: null
 }
 const getters = {
-  todos: state => {
-    return state.todos
-  },
   stateCo: state => {
     return state.stateCo
   }
@@ -22,25 +18,26 @@ const mutations = {
     this.state.stateCo = 'pending'
   },
   AUTH_SUCCESS (data) {
-    this.state.stateCo = 'success'
-    this.state.isconnected = true
-    this.state.user.name = data.user.displayName
-    this.state.user.userId = data.user.uid
+    console.log(this.state)
+    // this.state.fireStore.stateCo = 'success'
+    // this.state.fireStore.isConnected = true
+    // this.state.fireStore.userData.push(data)
   },
   AUTH_ERROR (data) {
-    this.state.stateCo = 'error'
+    this.state.fireStore.stateCo = 'error'
   }
 }
 
 const actions = {
   googleAuth ({ commit }) {
-    commit('AUTH_PENDING')
+    // commit('AUTH_PENDING')
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithPopup(provider).then(function (result) {
         commit('AUTH_SUCCESS', result)
-        console.log(result)
+        //console.log(result)
         resolve(result)
       }).catch(function (error) {
+        console.log(error)
         const { errorCaptured } = error
         reject(errorCaptured)
         commit('AUTH_ERROR')
