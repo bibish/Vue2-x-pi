@@ -13,23 +13,23 @@ import Post from './layout/Post'
 import Test from './layout/Test'
 export default {
   name: 'Container',
-  components: { Todo, Post, Menu },
+  components: { Todo, Post, Menu, Test },
   data () {
-    return { 
+    return {
       data: false
     }
   },
   mounted () {
     this.$store.dispatch('loadTodos')
-    console.log(this.$store.getters.Users);
+    console.log(this.$store.getters.Users)
   },
-  // beforeRouteEnter (to, from, next) {
-  //    next(vm => {
-  //     if(vm.$store.getters.Users.isUser === false){
-  //       next({path:'/signup'})
-  //     }
-  //   })
-  // }
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      if (vm.$store.getters.stateCo !== 'success') {
+        next({path: '/signup'})
+      }
+    })
+  }
 }
 
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="todo">
-  <h3>todoList</h3>
+  <h3>todoList (this one is offline)</h3>
   <input placeholder="new todo" type="text" v-model="newDo.title">
   <Button v-on:click="sendTodo">Add lodo</Button>
   <button v-on:click="armaguedon(todoList)">Armaguedon</button>

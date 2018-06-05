@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import users from './modules/users'
+// import users from './modules/users'
 import todos from './modules/todos'
-// import { mutations, getters, actions } from './stStore'
+import fireStore from './modules/fireStore'
 
 Vue.use(Vuex)
 const store = new Vuex.Store({
   modules: {
     todos,
-    users
+    fireStore
   }
 })
 

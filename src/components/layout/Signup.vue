@@ -1,11 +1,7 @@
 <template>
   <div class="signup">
-  <label>What's your name</label>
-  <input type="text" required v-model="username" placeHolder="jhonos doesos">
-  <button @click="connect">GO</button>
-   <label v-if ="error === true">
-    minimum 3 letters
-  </label>
+    <h1>connect here for more fun</h1>
+     <button @click="fireGoogleAuth">Google</button>
   </div>
 </template>
 
@@ -16,20 +12,14 @@ export default {
     return {
       username: null,
       password: null,
-      error:null
+      error: null
     }
   },
   methods: {
-    connect: function () {
-      const { username } = this
-      if(username.length < 3){
-        this.error = true
-      }else{
-        this.$store.dispatch('connectUser', { username }).then(() => {
-                this.$router.push('/')
-              })
-      }
-      
+    fireGoogleAuth: function () {
+      this.$store.dispatch('googleAuth').then(() => {
+        this.$router.push('/')
+      })
     }
   }
 }
@@ -40,6 +30,17 @@ export default {
 .signup{
   width:100%;
   margin: 0 auto;
-  text-align:left;
+  text-align:center;
+}
+button{
+  background: orangered;
+    padding: 12px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 8px;
+    /* color: black; */
+    margin: 0 auto;
 }
 </style>
