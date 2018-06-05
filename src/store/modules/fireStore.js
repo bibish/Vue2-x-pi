@@ -34,7 +34,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithPopup(provider).then(function (result) {
         commit('AUTH_SUCCESS', result)
-        //console.log(result)
+        // console.log(result)
         resolve(result)
       }).catch(function (error) {
         console.log(error)
