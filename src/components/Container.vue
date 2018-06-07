@@ -9,11 +9,9 @@
 <script>
 import Menu from './Menu'
 import Todo from './layout/Todo'
-import Post from './layout/Post'
-import Test from './layout/Test'
 export default {
   name: 'Container',
-  components: { Todo, Post, Menu, Test },
+  components: { Todo, Menu },
   data () {
     return {
       data: false
@@ -21,7 +19,7 @@ export default {
   },
   mounted () {
     this.$store.dispatch('loadTodos')
-    //console.log(this.$store.getters.Users)
+    // console.log(this.$store.getters.Users)
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {

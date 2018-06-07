@@ -4,9 +4,6 @@
     <ul>
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="Todo">Todolist</router-link></li>
-      <li><router-link to="Blog">Blog</router-link></li>
-      <li><router-link to="onVerraPlusTard">test</router-link></li>
-
     </ul>
   </nav>
   </div>
