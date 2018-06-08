@@ -1,14 +1,19 @@
 import { firebase, firestore } from './../../firebase'
 
-console.log(firebase, firestore)
 const state = {
   isConnected: false,
-  userData: [],
+  userData: null,
   stateCo: null
 }
 const getters = {
   stateCo: state => {
     return state.stateCo
+  },
+  userData: state => {
+    return state.userData
+  },
+  isConnected: state => {
+    return state.isConnected
   }
 }
 
@@ -17,7 +22,6 @@ const mutations = {
     this.state.stateCo = 'pending'
   },
   AUTH_SUCCESS (state, payload) {
-    console.log(payload, 'inside mutation')
     state.stateCo = 'success'
     state.userData = payload
     state.isConnected = true
@@ -31,29 +35,31 @@ const actions = {
   googleAuth ({ commit, state }, payload) {
     commit('AUTH_PENDING')
     return new Promise((resolve, reject) => {
-      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(data => {
-        const userData = {
-          username: data.user.displayName,
-          userId: data.user.uid
-        }
-        firestore.collection('users').where('userId', '==', userData.userId).get().then(snapshot => {
-          snapshot.forEach(doc => {
-            if (doc.exists === false) {
-              firestore.collection('users').add(userData).then(() => {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+        firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(data => {
+          const userData = {
+            username: data.user.displayName,
+            userId: data.user.uid
+          }
+          firestore.collection('users').where('userId', '==', userData.userId).get().then(snapshot => {
+            snapshot.forEach(doc => {
+              if (doc.exists === false) {
+                firestore.collection('users').add(userData).then(() => {
+                  commit('AUTH_SUCCESS', userData)
+                  resolve(data)
+                })
+              } else {
                 commit('AUTH_SUCCESS', userData)
                 resolve(data)
-              })
-            } else {
-              commit('AUTH_SUCCESS', userData)
-              resolve(data)
-            }
+              }
+            })
           })
+        }).catch(function (error) {
+          console.log(error)
+          const { errorCaptured } = error
+          reject(errorCaptured)
+          commit('AUTH_ERROR')
         })
-      }).catch(function (error) {
-        console.log(error)
-        const { errorCaptured } = error
-        reject(errorCaptured)
-        commit('AUTH_ERROR')
       })
     })
   }

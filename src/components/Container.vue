@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Menu></Menu>
-    <h1>Welcome there</h1>
+    <h1>Welcome there <span v-if="user">{{user.username}}</span></h1>
     <router-view></router-view>
   </div>
 </template>
@@ -9,6 +9,7 @@
 <script>
 import Menu from './Menu'
 import Todo from './layout/Todo'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Container',
   components: { Todo, Menu },
@@ -26,6 +27,11 @@ export default {
       if (vm.$store.getters.stateCo !== 'success') {
         next({path: '/signup'})
       }
+    })
+  },
+  computed: {
+    ...mapGetters({
+      user: 'userData'
     })
   }
 }
