@@ -19,7 +19,6 @@ export default {
     fireGoogleAuth: function () {
       this.$store.dispatch('googleAuth').then((r) => {
         this.$router.push('/')
-        this.$store.dispatch('authValid', r)
       })
     }
   }

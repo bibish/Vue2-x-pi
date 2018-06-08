@@ -1,7 +1,6 @@
-import firebase from 'firebase'
+import { firebase, firestore } from './../../firebase'
 
-const provider = new firebase.auth.GoogleAuthProvider()
-
+console.log(firebase, firestore)
 const state = {
   isConnected: false,
   userData: [],
@@ -17,11 +16,11 @@ const mutations = {
   AUTH_PENDING (data) {
     this.state.stateCo = 'pending'
   },
-  AUTH_SUCCESS (data) {
-    console.log(this.state)
-    // this.state.fireStore.stateCo = 'success'
-    // this.state.fireStore.isConnected = true
-    // this.state.fireStore.userData.push(data)
+  AUTH_SUCCESS (state, payload) {
+    console.log(payload, 'inside mutation')
+    state.stateCo = 'success'
+    state.userData = payload
+    state.isConnected = true
   },
   AUTH_ERROR (data) {
     this.state.fireStore.stateCo = 'error'
@@ -29,11 +28,27 @@ const mutations = {
 }
 
 const actions = {
-  googleAuth ({ commit }) {
-    // commit('AUTH_PENDING')
+  googleAuth ({ commit, state }, payload) {
+    commit('AUTH_PENDING')
     return new Promise((resolve, reject) => {
-      firebase.auth().signInWithPopup(provider).then(function (result) {
-        resolve(result)
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(data => {
+        const userData = {
+          username: data.user.displayName,
+          userId: data.user.uid
+        }
+        firestore.collection('users').where('userId', '==', userData.userId).get().then(snapshot => {
+          snapshot.forEach(doc => {
+            if (doc.exists === false) {
+              firestore.collection('users').add(userData).then(() => {
+                commit('AUTH_SUCCESS', userData)
+                resolve(data)
+              })
+            } else {
+              commit('AUTH_SUCCESS', userData)
+              resolve(data)
+            }
+          })
+        })
       }).catch(function (error) {
         console.log(error)
         const { errorCaptured } = error
@@ -41,9 +56,6 @@ const actions = {
         commit('AUTH_ERROR')
       })
     })
-  },
-  authValid ({ commit }, user) {
-    console.log('user sent', user)
   }
 }
 
