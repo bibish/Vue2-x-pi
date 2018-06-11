@@ -15,3 +15,11 @@ new Vue({
   router,
   template: '<App/>'
 })
+
+// TODO: add getter singnup logique dans le store
+// TODO: update router guard  virer some a cause des exact path ' /signup/lalala
+// TODO: remove les todo avec les clefs de firestore
+// TODO: virer la logique des mounteds
+// TODO: add loader => before update => uodated a chaque dispatch
+// TODO: create component toast qui affiche le state de chaque action
+// TODO: filter in mixins
