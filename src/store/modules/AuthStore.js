@@ -4,7 +4,11 @@ import {
 } from './../../firebase'
 const state = {
   isConnected: false,
-  userData: null,
+  userData: {
+    name: null,
+    userId: null,
+    docID: null
+  },
   stateCo: null
 }
 const getters = {
@@ -16,11 +20,14 @@ const getters = {
   },
   isConnected: state => {
     return state.isConnected
+  },
+  docId: state => {
+    return state.userData.docId
   }
 }
 
 const mutations = {
-  AUTH_PENDING (data) {
+  AUTH_PENDING (state, data) {
     this.state.stateCo = 'pending'
   },
   AUTH_SUCCESS (state, payload) {
@@ -40,21 +47,21 @@ const actions = {
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(data => {
         const userData = {
           name: data.user.displayName,
-          userId: data.user.uid
+          userId: data.user.uid,
+          todolist: []
         }
         const refs = firestore.collection('users')
-        // .where('userId', '==', userData.userId)
+        const ref = refs.doc()
         refs.where('userId', '==', userData.userId)
           .get().then(querySnapshot => {
-            userData.dbId = querySnapshot.docs[0].id
+            console.log(querySnapshot)
             if (querySnapshot.empty === true) {
-              console.log('create user')
-              refs.doc().set(userData)
+              userData.docId = ref.id
+              ref.set(userData)
               commit('AUTH_SUCCESS', userData)
               resolve(data)
-              // add users
             } else {
-              // just commit
+              userData.docId = querySnapshot.docs[0].id
               commit('AUTH_SUCCESS', userData)
               resolve(data)
             }

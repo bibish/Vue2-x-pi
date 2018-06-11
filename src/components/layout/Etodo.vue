@@ -1,15 +1,13 @@
 <template>
   <div class="Etodo">
-  <h3>EtodoList (this one is online)</h3>
+  <h3>EtodoList (this one is online and todos are stored on firestore)</h3>
   <input placeholder="new todo" type="text" v-model="newTodo">
-  <Button @click="addTodo">Add lodo</Button>
-  <button>Armaguedon</button>
-  <button>shuffle</button>
+  <Button @click="addTodo(newTodo)">Add lodo</Button>
+  <button @click="shuffle(todoList)">shuffle</button>
   <ul>
-    <li class="list">
-    <span></span>
-    <i class="material-icons" >clear</i>
-    <i class="material-icons" >done</i>
+    <li v-for="item in todoList"  class="list todoN">
+    <span>{{item}}</span>
+    <i class="material-icons" v-on:click="removeTodo(item)" >clear</i>
     </li>
   </ul>
   </div>
@@ -24,26 +22,29 @@ export default {
   mixins: [shuffle],
   data () {
     return {
-      todolist: null, // array
-      newTodo: null, // string
+      newTodo: null // string
     }
   },
   methods: {
-    addTodo: function () {
-      console.log(this.$data.newTodo)
-      // db.store todo
+    addTodo: function (todo) {
+     this.todoList.push(todo)
+     this.$store.dispatch('updateDbETodo', this.todoList)
     },
-    changeTodo: function () {
-      // db.store state
+    removeTodo: function (todo) {
+      console.log(todo)
+      const index = this.todoList.indexOf(todo)
+      this.todoList.splice(index,1)
+      this.$store.dispatch('updateDbETodo', this.todoList)
     }
   },
+  mounted () {
+    this.$store.dispatch('getETodos')
+    // console.log(this.$store.getters.Users)
+  },
   computed: {
-    refs: function(){
-      firestore.collection('users').where('userId', '==', this.$store.userData.userId)
-    },
-    getTodos: function (){ 
-      // db.get all todo
-    }
+     ...mapGetters({
+      todoList: 'getTodolist'
+    })
 
   }
 }
