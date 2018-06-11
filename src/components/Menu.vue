@@ -4,6 +4,7 @@
     <ul>
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="Todo">Todolist</router-link></li>
+      <li><router-link to="Etodo">Etodolist</router-link></li>
     </ul>
   </nav>
   </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="signup">
-    <h1>connect here for more fun</h1>
+    <h1>HHH</h1>
      <button @click="fireGoogleAuth">Google</button>
   </div>
 </template>

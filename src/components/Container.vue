@@ -1,7 +1,8 @@
 <template>
   <div class="container">
     <Menu></Menu>
-    <h1>Welcome there <span v-if="user">{{user.username}}</span></h1>
+    <h1>Welcome there <span v-if="isUser">mr {{user.name}}</span></h1>
+    <span v-if="pending && !isUser">{{pending}}</span>
     <router-view></router-view>
   </div>
 </template>
@@ -9,10 +10,11 @@
 <script>
 import Menu from './Menu'
 import Todo from './layout/Todo'
+import Etodo from './layout/Etodo'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Container',
-  components: { Todo, Menu },
+  components: { Todo, Menu, Etodo },
   data () {
     return {
       data: false
@@ -31,7 +33,9 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'userData'
+      user: 'userData',
+      pending: 'stateCo',
+      isUser: 'isConnected'
     })
   }
 }

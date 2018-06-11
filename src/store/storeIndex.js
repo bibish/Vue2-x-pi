@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import todos from './modules/todos'
-import fireStore from './modules/fireStore'
+import TodoStore from './modules/TodoStore'
+import AuthStore from './modules/AuthStore'
 Vue.use(Vuex)
 const store = new Vuex.Store({
   modules: {
-    todos,
-    fireStore
+    TodoStore,
+    AuthStore
   }
 })
 

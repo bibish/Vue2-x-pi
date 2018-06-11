@@ -1,70 +1,45 @@
 {
-  "todos": [
-    {
-      "title": "dfg",
-      "done": false,
-      "id": 1
-    },
-    {
-      "title": "dfg",
-      "done": true,
-      "id": 2
-    },
-    {
-      "title": "dfg",
-      "done": false,
-      "id": 4
-    },
-    {
-      "title": "dfg",
-      "done": false,
-      "id": 5
-    },
-    {
-      "title": "dfg",
-      "done": true,
-      "id": 6
-    },
-    {
-      "title": "cvbc",
-      "done": true,
-      "id": 8
-    }
-  ],
-  "albums": [
-    {
-      "id": 1,
-      "url": "https://avatars2.githubusercontent.com/u/23716996?s=40&v=4",
-      "title": "My git avatr"
-    }
-  ],
-  "posts": [
-    {
-      "id": 1,
-      "author": "Amb",
-      "authorId": 1,
-      "category": "lorem",
-      "img": "http://via.placeholder.com/350x150",
-      "title": "mon premier post cool",
-      "content": "Du lorem disruptif à n'en plus finir !"
-    },
-    {
-      "id": 2,
-      "author": "Ambi",
-      "authorId": 2,
-      "category": "sport",
-      "img": "http://via.placeholder.com/350x150",
-      "title": "mon premier post cool",
-      "content": "Du lorem disruptif à n'en plus finir dans du sport!"
-    },
-    {
-      "id": 3,
-      "author": "Amb",
-      "authorId": 1,
-      "category": "sport",
-      "img": "http://via.placeholder.com/350x150",
-      "title": "mon premier post cool",
-      "content": "Du lorem disruptif à n'en plus finir dans du sport mais pas le même!"
-    }
-  ]
+  "ligues": [{
+    "équipes": [{
+        "nom": "plop",
+        "ville": "ontatio",
+        "coatch": "cap'tn",
+        "joueurs": [{
+            "id1": {
+              "joueur": "thomas",
+              "pos": "nord",
+              "niveau": "mauvais"
+            }
+          },
+          {
+            "id2": {
+              "joueur": "tom",
+              "pos": "nord",
+              "niveau": "mauvais"
+            }
+          }
+        ]
+      },
+      {
+        "nom": "plop",
+        "ville": "ontatio",
+        "coatch": "cap'tn",
+        "joueurs": [{
+            "id1": {
+              "joueur": "thomas",
+              "pos": "nord",
+              "niveau": "mauvais"
+            }
+          },
+          {
+            "id2": {
+              "joueur": "tom",
+              "pos": "nord",
+              "niveau": "mauvais"
+            }
+          }
+        ]
+      }
+    ]
+  }]
 }
