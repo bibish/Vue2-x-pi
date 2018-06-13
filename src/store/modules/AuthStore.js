@@ -39,7 +39,7 @@ const mutations = {
     this.state.fireStore.stateCo = 'error'
   }
 }
-
+// TODO: add JWT and store user data in localstorage to avoid deco / latence issues
 const actions = {
   googleAuth ({ commit, state }, payload) {
     commit('AUTH_PENDING')
