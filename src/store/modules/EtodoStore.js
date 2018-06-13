@@ -16,7 +16,11 @@ const mutations = {
     }
   }
 }
+// TODO: add state in each action to avoid deco / latence and any sync issue betwwen the vue data and db data
 const actions = {
+  /**
+   * get all todo from my user document in the DB
+   */
   getETodos: function ({ commit, rootGetters }) {
     const id = rootGetters.docId
     const ref = firestore.collection('users').doc(id)
@@ -29,6 +33,9 @@ const actions = {
       }
     })
   },
+  /**
+   * Overwrite the todolist array in my user document with the new / less todo
+   */
   updateDbETodo: function ({commit, store, rootGetters}, todolist) {
     const id = rootGetters.docId
     const ref = firestore.collection('users').doc(id)

@@ -43,6 +43,9 @@ const mutations = {
 const actions = {
   googleAuth ({ commit, state }, payload) {
     commit('AUTH_PENDING')
+    /**
+     * return promise when user is added / logged in
+     */
     return new Promise((resolve, reject) => {
       firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(data => {
         const userData = {
@@ -52,15 +55,18 @@ const actions = {
         }
         const refs = firestore.collection('users')
         const ref = refs.doc()
+        // check if my user exist in db
         refs.where('userId', '==', userData.userId)
           .get().then(querySnapshot => {
             console.log(querySnapshot)
             if (querySnapshot.empty === true) {
+              // check if there is user in DB if not, get the documentID and set a new user
               userData.docId = ref.id
               ref.set(userData)
               commit('AUTH_SUCCESS', userData)
               resolve(data)
             } else {
+              // if there is user just keep the documentID and resolve promise
               userData.docId = querySnapshot.docs[0].id
               commit('AUTH_SUCCESS', userData)
               resolve(data)

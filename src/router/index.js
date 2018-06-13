@@ -6,6 +6,23 @@ import Todo from '@/components/layout/Todo'
 import Etodo from '@/components/layout/Etodo'
 import Signup from '@/components/layout/Signup'
 Vue.use(Router)
+
+const isNoUser = (to, from, next) => {
+  if (store.getters.isConnected === false) {
+    next()
+    return
+  }
+  next('/')
+}
+
+const ifUser = (to, from, next) => {
+  if (store.getters.isConnected === true) {
+    next()
+    return
+  }
+  next('/signup')
+}
+
 const router = new Router({
   routes: [
     {
@@ -21,27 +38,17 @@ const router = new Router({
         {
           path: 'etodo',
           component: Etodo,
-          meta: { requiresAuth: true }
+          beforeEnter: ifUser
         },
         {
           path: 'signup',
           component: Signup,
-          meta: { requiresAuth: true }
+          beforeEnter: isNoUser
         }
       ]
     }
   ],
   mode: 'history'
 })
-router.beforeEach((to, from, next) => {
-  const isUser = store.getters.isConnected
-  const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  if (isUser === false && to.path !== '/signup') {
-    next('/signup')
-  } else if (requiresAuth && isUser === true) {
-    next()
-  } else {
-    next()
-  }
-})
+
 export default router
