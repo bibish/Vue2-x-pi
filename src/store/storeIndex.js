@@ -3,12 +3,17 @@ import Vuex from 'vuex'
 import TodoStore from './modules/TodoStore'
 import AuthStore from './modules/AuthStore'
 import EtodoStore from './modules/EtodoStore'
+import { createModule } from 'vuex-toast'
+import 'vuex-toast/dist/vuex-toast.css'
 Vue.use(Vuex)
 const store = new Vuex.Store({
   modules: {
     TodoStore,
     EtodoStore,
-    AuthStore
+    AuthStore,
+    toast: createModule({
+      dismissInterval: 1500
+    })
   }
 })
 

@@ -28,7 +28,7 @@ const getters = {
 
 const mutations = {
   AUTH_PENDING (state, data) {
-    this.state.stateCo = 'pending'
+    state.stateCo = 'pending'
   },
   AUTH_SUCCESS (state, payload) {
     state.stateCo = 'success'
@@ -36,10 +36,10 @@ const mutations = {
     state.isConnected = true
   },
   AUTH_ERROR (data) {
-    this.state.fireStore.stateCo = 'error'
+    state.stateCo = 'error'
   }
 }
-// TODO: add JWT and store user data in localstorage to avoid deco / latence issues
+// TODO: add JWT and store user data in localstorage to avoid deco / latence
 const actions = {
   googleAuth ({ commit, state }, payload) {
     commit('AUTH_PENDING')
