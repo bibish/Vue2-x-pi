@@ -44,7 +44,7 @@ export default {
     ...mapActions({
       addToast: ADD_TOAST_MESSAGE
     }),
-    sendNotification(text) {
+    sendNotification (text) {
       console.log('pending trigger')
     }
   }

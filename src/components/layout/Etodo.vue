@@ -2,12 +2,12 @@
   <div class="Etodo">
   <h3>EtodoList (this one is online and todos are stored on firestore)</h3>
   <input placeholder="new todo" type="text" v-model="newTodo">
-  <Button @click="addTodo(newTodo)">Add lodo</Button>
+  <Button @click="addETodo(newTodo)">Add lodo</Button>
   <button @click="shuffle(todoList)">shuffle</button>
   <ul>
     <li v-for="(item, key) in todoList" :key="key"  class="list todoN">
     <span>{{item}}</span>
-    <i class="material-icons" v-on:click="removeTodo(item)" >clear</i>
+    <i class="material-icons" v-on:click="removeETodo(item)" >clear</i>
     </li>
   </ul>
   </div>
@@ -29,16 +29,20 @@ export default {
   // TODO: add loader => before update => uodated to each dispatch call
   methods: {
     // TODO: add by key not by entry
-    addTodo: function (todo) {
-      this.todoList.push(todo)
-      this.$store.dispatch('updateDbETodo', this.todoList)
+    addETodo: function (newTodo) {
+      const args = {
+        item: newTodo,
+        todoList: this.todoList
+      }
+      this.$store.dispatch('addETodo', args)
     },
     // TODO: delete by key not by entry
-    removeTodo: function (todo) {
-      console.log(todo)
-      const index = this.todoList.indexOf(todo)
-      this.todoList.splice(index, 1)
-      this.$store.dispatch('updateDbETodo', this.todoList)
+    removeETodo: function (todo) {
+      const args = {
+        item: todo,
+        todoList: this.todoList
+      }
+      this.$store.dispatch('removeETodo', args)
     }
   },
   mounted () {
