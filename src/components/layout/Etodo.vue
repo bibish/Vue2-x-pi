@@ -30,19 +30,11 @@ export default {
   methods: {
     // TODO: add by key not by entry
     addETodo: function (newTodo) {
-      const args = {
-        item: newTodo,
-        todoList: this.todoList
-      }
-      this.$store.dispatch('addETodo', args)
+      this.$store.dispatch('addETodo', newTodo)
     },
     // TODO: delete by key not by entry
     removeETodo: function (todo) {
-      const args = {
-        item: todo,
-        todoList: this.todoList
-      }
-      this.$store.dispatch('removeETodo', args)
+      this.$store.dispatch('removeETodo', todo)
     }
   },
   mounted () {

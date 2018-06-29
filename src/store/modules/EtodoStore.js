@@ -45,19 +45,19 @@ const actions = {
   /**
    * Overwrite the todolist array in my user document with the new / less todo
    */
-  addETodo: function ({commit, store, rootGetters}, args) {
+  addETodo: function ({commit, store, rootGetters, state}, args) {
     // send status to state
     commit('DB_PENDING')
-    const todolist = args.todoList
-    todolist.push(args.item)
-    // get doc id from another module in store
+    const todolist = state.todolist
+    todolist.push(args)
+    // get doc id from the auth module to know where push data
     const id = rootGetters.docId
     const ref = firestore.collection('users').doc(id)
     ref.set({todolist}, {merge: true}).then(r => {
       commit('SET_TODOLIST', todolist)
     }).catch(r => {
       // catch error and send the array nop updated
-      commit('DB_ERROR', args.todoList)
+      commit('DB_ERROR', todolist)
       console.log(r)
     })
   },
@@ -68,8 +68,8 @@ const actions = {
     // send status to state
     commit('DB_PENDING')
     console.log(args, 'args in remove')
-    const todolist = args.todoList
-    const index = todolist.indexOf(args.item)
+    const todolist = state.todolist
+    const index = todolist.indexOf(args)
     todolist.splice(index, 1)
     // get doc id from another module in store
     const id = rootGetters.docId
@@ -78,7 +78,7 @@ const actions = {
       commit('SET_TODOLIST', todolist)
     }).catch(r => {
       // catch error and send the array nop updated
-      commit('DB_ERROR', args.todoList)
+      commit('DB_ERROR', todolist)
       console.log(r)
     })
   }
