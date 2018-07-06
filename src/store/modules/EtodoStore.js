@@ -24,7 +24,7 @@ const mutations = {
     state.status = 'writting in db'
   }
 }
-// TODO: add state in each action to avoid deco / latence and any sync issue betwwen the vue data and db data
+
 const actions = {
   /**
    * get all todo from my user document in the DB

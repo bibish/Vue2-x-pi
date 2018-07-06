@@ -25,14 +25,11 @@ export default {
     }
   },
   // TODO: create component toast to display all state 'success','error,'pending etc
-  // TODO: remove logic from compoenent and add it in the store actions
   // TODO: add loader => before update => uodated to each dispatch call
   methods: {
-    // TODO: add by key not by entry
     addETodo: function (newTodo) {
       this.$store.dispatch('addETodo', newTodo)
     },
-    // TODO: delete by key not by entry
     removeETodo: function (todo) {
       this.$store.dispatch('removeETodo', todo)
     }
@@ -45,7 +42,6 @@ export default {
     ...mapGetters({
       todoList: 'getTodolist'
     })
-
   }
 }
 
