@@ -12,7 +12,7 @@ const router = new Router({
       path: '/',
       name: 'Home',
       component: Container,
-      // meta: { requiresAuth: true },
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'todo',
@@ -20,25 +20,31 @@ const router = new Router({
         },
         {
           path: 'etodo',
-          component: Etodo,
-          meta: { requiresAuth: true }
-        },
-        {
-          path: 'signup',
-          component: Signup
+          component: Etodo
         }
       ]
+    },
+    {
+      path: '/signup',
+      component: Signup
     }
   ],
   mode: 'history'
 })
+
+// TODO: put guards in a specific file to make the router folder easier
+
+/**
+ * Check before each route change if the route have an auth guard requiresAuth
+ * Check if there is an user if the route need to be connected
+ */
 router.beforeEach((to, from, next) => {
   const isUser = store.getters.isConnected
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
-  if (isUser === false && to.path !== '/signup') {
+  if (requiresAuth && isUser === false) {
     next('/signup')
-  } else if (requiresAuth && isUser === true) {
-    next()
+  } else if (isUser === true && to.path === '/signup') {
+    next('/')
   } else {
     next()
   }

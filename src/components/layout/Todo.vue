@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import shuffle from '../../mixins/shuffleMixin'
 export default {
   name: 'Todo',
@@ -52,6 +52,9 @@ export default {
   computed: {
     ...mapGetters({
       todoList: 'getTodos'
+    }),
+    ...mapActions({
+      todoList: 'loadTodos'
     })
   }
 }

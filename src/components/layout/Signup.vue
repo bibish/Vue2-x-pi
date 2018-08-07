@@ -1,6 +1,6 @@
 <template>
   <div class="signup">
-    <h1>you should be logged in to user the Etodo app</h1>
+    <h1>you should be logged in to use the app</h1>
      <button @click="fireGoogleAuth">Google</button>
   </div>
 </template>

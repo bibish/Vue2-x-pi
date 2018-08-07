@@ -6,7 +6,8 @@ const state = {
     'id': '',
     'userId': '',
     'title': '',
-    'done': ''
+    'done': '',
+    'err': ''
   }]
 }
 
@@ -29,13 +30,13 @@ const mutations = {
     // console.log('remove from local state', todos.indexOf(todo), 'in state', typeof state.todos)
     todos.splice(todos.indexOf(todo), 1)
   },
-  UPDATE_TODO (state, todo) {
-    // nothing here
+  ERROR_CALL (state, err) {
+    state.todos.err = `error with API, ${err.response.status}`
   }
 }
 
 const actions = {
-  loadTodos ({ commit }) {
+  loadTodos ({ commit, state }) {
     axios
       .get(`${API}/todos`)
       .then(r => r.data)

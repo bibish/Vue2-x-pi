@@ -58,7 +58,6 @@ const actions = {
         // check if my user exist in db
         refs.where('userId', '==', userData.userId)
           .get().then(querySnapshot => {
-            console.log(querySnapshot)
             if (querySnapshot.empty === true) {
               // check if there is user in DB if not, get the documentID and set a new user
               userData.docId = ref.id
