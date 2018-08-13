@@ -5,6 +5,7 @@ import Container from '@/components/Container'
 import Todo from '@/components/layout/Todo'
 import Etodo from '@/components/layout/Etodo'
 import Signup from '@/components/layout/Signup'
+import User from '@/components/layout/User'
 Vue.use(Router)
 const router = new Router({
   routes: [
@@ -21,6 +22,10 @@ const router = new Router({
         {
           path: 'etodo',
           component: Etodo
+        },
+        {
+          path: 'Profil',
+          component: User
         }
       ]
     },

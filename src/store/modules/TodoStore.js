@@ -40,6 +40,9 @@ const actions = {
     axios
       .get(`${API}/todos`)
       .then(r => r.data)
+      .catch(error => {
+        console.log('erreur', error)
+      })
       .then(todos => {
         commit('SET_TODOS', todos)
       })
