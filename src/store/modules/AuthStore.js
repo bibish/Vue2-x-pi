@@ -39,22 +39,50 @@ const mutations = {
   },
   AUTH_ERROR (data) {
     state.stateCo = 'error'
+  },
+  UNAUTH_SUCCES (state) {
+    state.userData = {}
+    state.isConnected = false
   }
 }
-// TODO: add JWT and store user data in localstorage to avoid deco / latence
+
 const actions = {
+  isAlreadyConnected ({ commit, state }) {
+    console.log('test')
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        console.log(user)
+        const userData = {
+          name: user.displayName,
+          userId: user.uid,
+          userPic: user.photoURL,
+          todolist: []
+        }
+        const refs = firestore.collection('users')
+        refs.where('userId', '==', userData.userId)
+          .get().then(querySnapshot => {
+            userData.docId = querySnapshot.docs[0].id
+          })
+          .then(r => {
+            commit('AUTH_SUCCESS', userData)
+          })
+      } else {
+        console.log('lol nop')
+      }
+    })
+  },
+  logout ({ commit }) {
+    firebase.auth().signOut().then(r => {
+      console.log('disconnected')
+      commit('UNAUTH_SUCCES')
+    }).catch(er => {
+      console.log('error during deco', er)
+    })
+  },
   googleAuth ({ commit, state }, payload) {
     commit('AUTH_PENDING')
-    /**
-     * return promise when user is added / logged in
-     */
-
-    // TODO: make  .setPersistence(firebase.auth.Auth.Persistence.SESSION)
     return new Promise((resolve, reject) => {
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(f => {
-          return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-        })
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(data => {
           const userData = {
             name: data.user.displayName,

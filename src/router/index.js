@@ -4,7 +4,6 @@ import store from '../store/storeIndex'
 import Container from '@/components/Container'
 import Todo from '@/components/layout/Todo'
 import Etodo from '@/components/layout/Etodo'
-import Signup from '@/components/layout/Signup'
 import User from '@/components/layout/User'
 Vue.use(Router)
 const router = new Router({
@@ -30,10 +29,6 @@ const router = new Router({
           meta: { requiresAuth: true }
         }
       ]
-    },
-    {
-      path: '/signup',
-      component: Signup
     }
   ],
   mode: 'history'
@@ -49,8 +44,6 @@ router.beforeEach((to, from, next) => {
   const isUser = store.getters.isConnected
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   if (requiresAuth && isUser === false) {
-    next('/signup')
-  } else if (isUser === true && to.path === '/signup') {
     next('/')
   } else {
     next()

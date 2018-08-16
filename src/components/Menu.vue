@@ -7,17 +7,19 @@
       <li v-if="isUser"><router-link to="Etodo">Etodolist</router-link></li>
       <li v-if="isUser"><router-link to="Profil">Profil</router-link></li>
     </ul>
-    <Signup v-if="isUser === false" />
+    <Signup v-if="isUser !== true" />
+    <Logout v-else />
   </nav>
   </div>
 </template>
 
 <script>
 import Signup from './layout/Signup'
+import Logout from './layout/Logout'
 import { mapGetters } from 'vuex'
 export default {
   name: 'Menu',
-  components: { Signup },
+  components: { Signup, Logout },
   data () {
     return {}
   },
