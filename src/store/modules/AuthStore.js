@@ -7,7 +7,9 @@ const state = {
   userData: {
     name: null,
     userId: null,
-    docID: null
+    docID: null,
+    todolist: null,
+    userPic: null
   },
   stateCo: null
 }
@@ -57,6 +59,7 @@ const actions = {
           const userData = {
             name: data.user.displayName,
             userId: data.user.uid,
+            userPic: data.user.photoURL,
             todolist: []
           }
           const refs = firestore.collection('users')

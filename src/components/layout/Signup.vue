@@ -1,7 +1,6 @@
 <template>
   <div class="signup">
-    <h1>you should be logged in to use the app</h1>
-     <button @click="fireGoogleAuth">Google</button>
+     <a href="#" @click="fireGoogleAuth">SignIn</a>
   </div>
 </template>
 
@@ -28,14 +27,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.signup{
-  width:100%;
-  margin: 0 auto;
-  text-align:center;
+.signup {
+  padding: 8px;
 }
-button{
+.signup a{
   background: orangered;
-    padding: 12px;
+  display: block;
+    padding: 8px;
     color: #fff;
     font-weight: bold;
     font-size: 15px;

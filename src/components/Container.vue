@@ -2,7 +2,6 @@
   <div class="container">
     <Menu></Menu>
     <h1>Welcome there <span v-if="isUser">mr {{user.name}}</span></h1>
-    <toast position="ne"></toast>
     <router-view></router-view>
   </div>
 </template>
@@ -11,11 +10,10 @@
 import Menu from './Menu'
 import Todo from './layout/Todo'
 import Etodo from './layout/Etodo'
-import { Toast, ADD_TOAST_MESSAGE } from 'vuex-toast'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'Container',
-  components: { Todo, Menu, Etodo, Toast },
+  components: { Todo, Menu, Etodo },
   data () {
     return {
       data: false
@@ -27,15 +25,6 @@ export default {
       pending: 'stateCo',
       isUser: 'isConnected'
     })
-  },
-  // TODO: create plugin to send notification for each muation state
-  methods: {
-    ...mapActions({
-      addToast: ADD_TOAST_MESSAGE
-    }),
-    sendNotification (text) {
-      console.log('pending trigger')
-    }
   }
 }
 

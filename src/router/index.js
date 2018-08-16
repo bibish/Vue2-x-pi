@@ -13,19 +13,21 @@ const router = new Router({
       path: '/',
       name: 'Home',
       component: Container,
-      meta: { requiresAuth: true },
       children: [
         {
           path: 'todo',
-          component: Todo
+          component: Todo,
+          meta: { requiresAuth: true }
         },
         {
           path: 'etodo',
-          component: Etodo
+          component: Etodo,
+          meta: { requiresAuth: true }
         },
         {
           path: 'Profil',
-          component: User
+          component: User,
+          meta: { requiresAuth: true }
         }
       ]
     },
