@@ -47,11 +47,13 @@ const mutations = {
 }
 
 const actions = {
+  /**
+  * Check on the storage if the user is already connected to autoconnect
+  */
   isAlreadyConnected ({ commit, state }) {
-    console.log('test')
     firebase.auth().onAuthStateChanged(user => {
+      // user is the object returned by the googleauth
       if (user) {
-        console.log(user)
         const userData = {
           name: user.displayName,
           userId: user.uid,
@@ -71,6 +73,9 @@ const actions = {
       }
     })
   },
+  /**
+  * disconnect user and clean storage
+  */
   logout ({ commit }) {
     firebase.auth().signOut().then(r => {
       console.log('disconnected')
@@ -79,6 +84,9 @@ const actions = {
       console.log('error during deco', er)
     })
   },
+  /**
+  * Use google auth to create the user or connect it
+  */
   googleAuth ({ commit, state }, payload) {
     commit('AUTH_PENDING')
     return new Promise((resolve, reject) => {

@@ -4,7 +4,11 @@
       <div class="container" >
       <Menu></Menu>
       <h1>Welcome there <span v-if="isUser">mr {{user.name}}</span></h1>
-      <router-view></router-view>
+      <div id="parent">
+      <transition :name="transitionName">
+        <router-view class="child-view"></router-view>
+      </transition>
+      </div>
     </div>
     </div>
     <div v-else class="lds-ripple"><div></div><div></div></div>
@@ -21,8 +25,14 @@ export default {
   components: { Todo, Menu, Etodo },
   data () {
     return {
-      data: false
+      transitionName: 'slide-left'
     }
+  },
+  beforeRouteUpdate (to, from, next) {
+    const toDepth = to.path.split('/').length
+    const fromDepth = from.path.split('/').length
+    this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+    next()
   },
   computed: {
     ...mapGetters({
@@ -41,14 +51,13 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
 .container{
- display:flex;
- width:100%;
- flex-flow:row;
- flex-wrap:wrap;
- justify-content:space-between;
- align-items: flex-start;
-align-content: flex-start;
+min-height: 100vh;
+width:100%;
 border:1px solid red
+}
+#parent{
+margin: 10px 0;
+position: relative;
 }
 h1, h2 {
   font-weight: normal;
@@ -95,5 +104,28 @@ a {
     height: 58px;
     opacity: 0;
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s ease;
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+.child-view {
+  position:absolute;
+  left: 0;
+  right: 0;
+  top: 20%;
+  transition: all 0.3s ease-in-out;
+}
+.slide-left-enter, .slide-right-leave-active {
+  opacity: 0;
+  -webkit-transform: translate(30px, 0);
+  transform: translate(30px, 0);
+}
+.slide-left-leave-active, .slide-right-enter {
+  opacity: 0;
+  -webkit-transform: translate(-30px, 0);
+  transform: translate(-30px, 0);
 }
 </style>
