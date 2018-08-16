@@ -1,7 +1,7 @@
 <template>
   <div >
-    <div v-if="pending == 'success'">
-      <div class="container" >
+    <div >
+      <div class="container" v-if="pending !== 'pending'" >
       <Menu></Menu>
       <h1>Welcome there <span v-if="isUser">mr {{user.name}}</span></h1>
       <div id="parent">
@@ -10,8 +10,9 @@
       </transition>
       </div>
     </div>
-    </div>
+
     <div v-else class="lds-ripple"><div></div><div></div></div>
+    </div>
   </div>
 </template>
 
