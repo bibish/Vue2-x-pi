@@ -53,6 +53,7 @@ const actions = {
   isAlreadyConnected ({ commit, state }) {
     firebase.auth().onAuthStateChanged(user => {
       // user is the object returned by the googleauth
+      commit('AUTH_PENDING', state)
       if (user) {
         const userData = {
           name: user.displayName,
@@ -69,6 +70,7 @@ const actions = {
             commit('AUTH_SUCCESS', userData)
           })
       } else {
+        commit('AUTH_ERROR', state)
         console.log('lol nop')
       }
     })

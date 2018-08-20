@@ -1,7 +1,7 @@
 <template>
   <div >
     <div >
-      <div class="container" v-if="pending !== 'pending'" >
+      <div class="container" v-if=" (pending !== null) && (pending === 'success') || (pending === 'error')" >
       <Menu></Menu>
       <h1>Welcome there <span v-if="isUser">mr {{user.name}}</span></h1>
       <div id="parent">
@@ -42,7 +42,7 @@ export default {
       isUser: 'isConnected'
     })
   },
-  created () {
+  async mounted () {
     this.$store.dispatch('isAlreadyConnected')
   }
 }
