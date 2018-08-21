@@ -50,11 +50,12 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 .container{
 min-height: 100vh;
-width:100%;
-border:1px solid red
+border:1px solid red;
+padding: 10px;
+margin:10px;
 }
 #parent{
 margin: 10px 0;

@@ -5,6 +5,7 @@ import Container from '@/components/Container'
 import Todo from '@/components/layout/Todo'
 import Etodo from '@/components/layout/Etodo'
 import User from '@/components/layout/User'
+import Kekflix from '@/components/layout/Kekflix'
 Vue.use(Router)
 const router = new Router({
   routes: [
@@ -29,6 +30,11 @@ const router = new Router({
           meta: { requiresAuth: true }
         }
       ]
+    },
+    {
+      path: '/kekflix',
+      component: Kekflix,
+      meta: { requiresAuth: true }
     }
   ],
   mode: 'history'
