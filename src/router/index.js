@@ -7,6 +7,7 @@ import Etodo from '@/components/layout/Etodo'
 import User from '@/components/layout/User'
 import Kekflix from '@/components/layout/Kekflix'
 Vue.use(Router)
+//toto
 const router = new Router({
   routes: [
     {
